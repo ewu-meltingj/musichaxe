@@ -1,14 +1,14 @@
 # Basic information about the game.
-name: Music Fighter
-description: A short one-line description.
+name: MusicHaxe
+description: Simple Game to learn Haxe.
 
 # Information about the game developer.
 developer:
-  name: Your Company Name
-  url: http://yourwebsite.com
+  name: SourCream
+  url: http://sourcre.am
 
 # The game's unique identifier.
-id: com.shwamm.yourgame
+id: com.shwamm.musixhaxe
 
 # The game's version string.
 version: 1.0.2
