@@ -1,9 +1,13 @@
 {
-  "name": "musichaxe",
-  "version": "0.1.0",
-  "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-shell": "^0.3.0",
-    "run-sequence": "^1.0.2"
-  }
+	"name": "musichaxe",
+	"version": "0.1.0",
+	"devDependencies": {
+		"gulp": "^3.8.11",
+		"gulp-shell": "^0.3.0",
+		"run-sequence": "^1.0.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/ewu-meltingj/musichaxe.git"
+	}
 }
