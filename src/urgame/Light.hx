@@ -80,8 +80,8 @@ class Light extends Component {
 
 	public function maxLight() {
 		_lightPad.alpha._ = 1;
-		_lightPad.x._ = _cx + Math.cos(getRad(_currentDelta * 900)) * _radius;
-  		_lightPad.y._ = _cy + Math.sin(getRad(_currentDelta * 450)) * _radius;
+		//_lightPad.x._ = _cx + Math.cos(getRad(_currentDelta * 900)) * _radius;
+  		//_lightPad.y._ = _cy + Math.sin(getRad(_currentDelta * 450)) * _radius;
 	}
 
 	public function dimLight(direction:Int) {
