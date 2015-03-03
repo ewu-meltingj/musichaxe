@@ -13,29 +13,45 @@ class Main {
 		System.init();
 		var width:Int = System.stage.width;
 		var height:Int = System.stage.height;
-		var bpm:Int = 90;
-		var tpb:Int = 32;
+		var bpm:Int = 80;
 
 		// Load up the compiled pack in the assets directory named "bootstrap"
 		var background = new FillSprite(0x333333, width, height);
 		System.root.addChild(new Entity().add(background));
 
+		//left
 		System.root.addChild(new Entity()
-			.add(new HeartBeat(bpm, tpb))
-			.add(new Light(width/2 - 200, height/2, .0125, "circleBlue"))
-			.add(new Bass("kickElectro02"))
+			.add(new HeartBeat(bpm))
+			.add(new Light(width/2 - 200, height/2, .005, "circleBlue"))
+			.add(new Bass("kickElectro02", "mindOne"))
 			);
 
+		//center
 		System.root.addChild(new Entity()
-			.add(new HeartBeat(bpm, tpb))
-			.add(new Light(width/2, height/2, .0125, "circlePurple"))
-			.add(new Snare("snareBlock"))
+			.add(new HeartBeat(bpm))
+			.add(new Light(width/2, height/2, .005, "circlePurple"))
+			.add(new Snare("snareBlock", "mindThree"))
 			);
 
+		//right
 		System.root.addChild(new Entity()
-			.add(new HeartBeat(bpm, tpb))
-			.add(new Light(width/2 + 200, height/2, 0.02, "circleYellow"))
-			.add(new Hats("hihatDigital"))
+			.add(new HeartBeat(bpm))
+			.add(new Light(width/2 + 200, height/2, 0.015, "circleYellow"))
+			.add(new Hats("hihatClip", "mindTwo"))
+			);
+
+		//top
+		System.root.addChild(new Entity()
+			.add(new HeartBeat(bpm))
+			.add(new Light(width/2, height/2 - 200, 0.005, "circleYellow"))
+			.add(new Arp("arp", "mindFour"))
+			);
+
+		//bottom
+		System.root.addChild(new Entity()
+			.add(new HeartBeat(bpm))
+			.add(new Light(width/2, height/2 + 200, 0.002, "circleYellow"))
+			.add(new Rain("rainStick", "mindFive"))
 			);
 	}
 }

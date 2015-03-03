@@ -12,9 +12,11 @@ class Instrument extends Component {
 	private var _pack :AssetPack;
 	private var _light :Light;
 	private var _sound:String;
+	private var _soundEvent:String;
 
-	public function new(sound:String) {
+	public function new(sound:String, soundEvent:String) {
 		_sound = sound;
+		_soundEvent = soundEvent;
 	}
 
 	override public function onAdded () {
@@ -39,5 +41,9 @@ class Instrument extends Component {
 
     private function onSuccess (pack :AssetPack) {
     	_pack = pack;
+	}
+
+	public function playSoundEvent () {
+    	_pack.getSound(_soundEvent).play(0.35);
 	}
 }

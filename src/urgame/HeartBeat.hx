@@ -1,7 +1,5 @@
 package urgame;
 
-
-import flambe.animation.AnimatedFloat;
 import flambe.Component;
 import flambe.util.Value;
 import flambe.script.Delay;
@@ -9,25 +7,24 @@ import flambe.script.Delay;
 
 /**
 * @author Mark Knol [http://blog.stroep.nl]
+* based off of Mark's HeartBeat.
+* Updating to keep a steadier rhythm with delta
 */
 class HeartBeat extends Component {
 	public var beat:Value<Int>;
-	public var beatsPerMinute:AnimatedFloat;
-	public var ticksPerBeat:Int;
+	public var ticksPerBeat:Int = 32;
 	
-	var _current:Float = 0; // seconds
-	var _seconds:Float = 0; // seconds
-	var _beat:Float = 1; // seconds
+	private var _current:Float = 0; // seconds
+	private var _seconds:Float = 0; // seconds
+	private var _beat:Float = 60; // seconds
 	
-	public function new(beatsPerMinute:Int, ticksPerBeat:Int) {
-		this.ticksPerBeat = ticksPerBeat;
-		this.beatsPerMinute = new AnimatedFloat(beatsPerMinute);
+	public function new(beatsPerMinute:Int) {
+		_beat /= beatsPerMinute;
 		this.beat = new Value<Int>(0);
 	}
 	
 	override public function onUpdate(dt:Float) {
 		_current += dt;
-		beatsPerMinute.update(dt);
 
 		if (_current >= _beat) {
 			_current = _current - _beat;

@@ -1,10 +1,12 @@
 package urgame;
 
 
-class Bass extends Instrument {
+class Arp extends Instrument {
 	override function onBeatChanged(to:Int, from:Int) {
-		if (from%4 == 0) {
+		if (from == 0) {
 			_pack.getSound(_sound).play(1);
+		}
+		if (from%8 == 0) {
 			_light.maxLight();
 		}
 	}

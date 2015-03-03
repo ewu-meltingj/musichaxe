@@ -5,7 +5,10 @@ import flambe.System;
 import flambe.asset.AssetPack;
 import flambe.display.ImageSprite;
 import flambe.asset.Manifest;
-import flambe.animation.AnimatedFloat;
+import flambe.script.Delay;
+import flambe.display.EmitterMold;
+import flambe.display.EmitterSprite;
+import flambe.input.PointerEvent;
 
 
 class Light extends Component {
@@ -15,12 +18,22 @@ class Light extends Component {
 	private var _yCoord :Float;
 	private var _dimSpeed :Float;
 	private var _image :String;
+	private var _isDown:Bool;
+	private var _instrument:Instrument;
+	private var _cx:Float;
+	private var _cy:Float;
+	private var _radius:Float = 20;
+	private var _currentDelta:Float = 0;
+
 
 	public function new(xCoord:Float, yCoord:Float, dimSpeed:Float, image:String) {
 		_xCoord = xCoord;
 		_yCoord = yCoord;
+		_cx = xCoord;
+		_cy = yCoord;
 		_dimSpeed = dimSpeed;
 		_image = image;
+		_isDown = true;
 	}
 
 	override public function onAdded () {
@@ -31,6 +44,7 @@ class Light extends Component {
 
     private function onSuccess (pack :AssetPack) {
     	_pack = pack;
+    	_instrument = owner.getFromParents(Instrument);
     	addLight();
 	}
 
@@ -39,19 +53,42 @@ class Light extends Component {
 		_lightPad.setXY(
 			_xCoord - _lightPad.getNaturalWidth()/2, 
 			_yCoord - _lightPad.getNaturalHeight()/2);
+
+		_lightPad.pointerDown.connect(function (_) modifyLight());
 		owner.add(_lightPad);
 	}
 
+	private function modifyLight() {
+		_instrument.playSoundEvent();
+		maxLight();
+	}
+
 	override public function onUpdate(dt:Float) {
-		if(_lightPad.alpha._ > 0)
-			dimLight();
+		if(_lightPad.alpha._ > 0 && _isDown) {
+			dimLight(-1);
+		}
+		else if(_lightPad.alpha._ < 1) {
+			_isDown = false;
+			dimLight(1);
+		}
+		else
+			_isDown = true;
+
+		_currentDelta += dt;
+		_currentDelta = _currentDelta%360;
 	}
 
 	public function maxLight() {
 		_lightPad.alpha._ = 1;
+		_lightPad.x._ = _cx + Math.cos(getRad(_currentDelta * 900)) * _radius;
+  		_lightPad.y._ = _cy + Math.sin(getRad(_currentDelta * 450)) * _radius;
 	}
 
-	public function dimLight() {
-		_lightPad.alpha._ -= _dimSpeed; // half transparent
+	public function dimLight(direction:Int) {
+		_lightPad.alpha._ += _dimSpeed*direction;
 	}
+
+	private function getRad(angle:Float) : Float{
+		return angle * Math.PI / 180;
+	};
 }
