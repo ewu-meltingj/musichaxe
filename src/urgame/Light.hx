@@ -20,17 +20,11 @@ class Light extends Component {
 	private var _image :String;
 	private var _isDown:Bool;
 	private var _instrument:Instrument;
-	private var _cx:Float;
-	private var _cy:Float;
-	private var _radius:Float = 20;
-	private var _currentDelta:Float = 0;
 
 
 	public function new(xCoord:Float, yCoord:Float, dimSpeed:Float, image:String) {
 		_xCoord = xCoord;
 		_yCoord = yCoord;
-		_cx = xCoord;
-		_cy = yCoord;
 		_dimSpeed = dimSpeed;
 		_image = image;
 		_isDown = true;
@@ -52,7 +46,8 @@ class Light extends Component {
 		_lightPad = new ImageSprite(_pack.getTexture(_image));
 		_lightPad.setXY(
 			_xCoord - _lightPad.getNaturalWidth()/2, 
-			_yCoord - _lightPad.getNaturalHeight()/2);
+			_yCoord - _lightPad.getNaturalHeight()/2
+		);
 
 		_lightPad.pointerDown.connect(function (_) modifyLight());
 		owner.add(_lightPad);
@@ -73,15 +68,10 @@ class Light extends Component {
 		}
 		else
 			_isDown = true;
-
-		_currentDelta += dt;
-		_currentDelta = _currentDelta%360;
 	}
 
 	public function maxLight() {
 		_lightPad.alpha._ = 1;
-		//_lightPad.x._ = _cx + Math.cos(getRad(_currentDelta * 900)) * _radius;
-  		//_lightPad.y._ = _cy + Math.sin(getRad(_currentDelta * 450)) * _radius;
 	}
 
 	public function dimLight(direction:Int) {
