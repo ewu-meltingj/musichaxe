@@ -23,10 +23,10 @@ class Instrument extends Component {
 		var manifest = Manifest.fromAssets("audio");
 		var loader = System.loadAssetPack(manifest);
 		loader.get(onSuccess);
-    }
+	}
 
-    override public function onStart() {
-    	_light = owner.getFromParents(Light);
+	override public function onStart() {
+		_light = owner.getFromParents(Light);
 		var heartBeat = owner.getFromParents(HeartBeat);
 		_connection = heartBeat.beat.changed.connect(onBeatChanged);
 	}
@@ -39,11 +39,11 @@ class Instrument extends Component {
 		super.dispose();
 	}
 
-    private function onSuccess (pack :AssetPack) {
-    	_pack = pack;
+	private function onSuccess (pack :AssetPack) {
+		_pack = pack;
 	}
 
 	public function playSoundEvent () {
-    	_pack.getSound(_soundEvent).play(0.35);
+		_pack.getSound(_soundEvent).play(0.35);
 	}
 }

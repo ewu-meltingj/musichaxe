@@ -34,12 +34,12 @@ class Light extends Component {
 		var manifest = Manifest.fromAssets("image");
 		var loader = System.loadAssetPack(manifest);
 		loader.get(onSuccess);
-    }
+	}
 
-    private function onSuccess (pack :AssetPack) {
-    	_pack = pack;
-    	_instrument = owner.getFromParents(Instrument);
-    	addLight();
+	private function onSuccess (pack :AssetPack) {
+		_pack = pack;
+		_instrument = owner.getFromParents(Instrument);
+		addLight();
 	}
 
 	private function addLight() {
