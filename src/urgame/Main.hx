@@ -16,8 +16,13 @@ class Main {
 		var bpm:Int = 80;
 
 		// Load up the compiled pack in the assets directory named "bootstrap"
-		var background = new FillSprite(0x333333, width, height);
+		var background = new FillSprite(0x222222, width, height);
 		System.root.addChild(new Entity().add(background));
+
+		//floor
+		System.root.addChild(new Entity()
+			.add(new Floor())
+			);
 
 		//left
 		System.root.addChild(new Entity()
