@@ -27,35 +27,35 @@ class Main {
 		//first
 		System.root.addChild(new Entity()
 			.add(new HeartBeat(bpm))
-			.add(new Light(width/2 - 400, height - 60, 0.002, "circlePurple"))
+			.add(new Light(width/2 - 400, height - 60, 0.002, "circleBlue"))
 			.add(new Rain("rainStick", "mindFive"))
 			);
 
 		//second
 		System.root.addChild(new Entity()
 			.add(new HeartBeat(bpm))
-			.add(new Light(width/2 - 200, height - 60, .005, "circlePurple"))
+			.add(new Light(width/2 - 200, height - 60, .005, "circleBlue"))
 			.add(new Bass("kickElectro02", "mindOne"))
 			);
 
 		//third
 		System.root.addChild(new Entity()
 			.add(new HeartBeat(bpm))
-			.add(new Light(width/2, height - 60, .005, "circlePurple"))
+			.add(new Light(width/2, height - 60, .005, "circleBlue"))
 			.add(new Snare("snareBlock", "mindThree"))
 			);
 
 		//fourth
 		System.root.addChild(new Entity()
 			.add(new HeartBeat(bpm))
-			.add(new Light(width/2 + 200, height - 60, 0.015, "circlePurple"))
+			.add(new Light(width/2 + 200, height - 60, 0.015, "circleBlue"))
 			.add(new Hats("hihatClip", "mindTwo"))
 			);
 
 		//fifth
 		System.root.addChild(new Entity()
 			.add(new HeartBeat(bpm))
-			.add(new Light(width/2 + 400, height - 60, 0.005, "circlePurple"))
+			.add(new Light(width/2 + 400, height - 60, 0.005, "circleBlue"))
 			.add(new Arp("arp", "mindFour"))
 			);
 

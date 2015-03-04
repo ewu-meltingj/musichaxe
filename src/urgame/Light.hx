@@ -47,7 +47,7 @@ class Light extends Component {
 
 	private function addLight() {
 		_lightPad = new ImageSprite(_pack.getTexture(_image));
-		_lightMask = new ImageSprite(_pack.getTexture("light"));
+		_lightMask = new ImageSprite(_pack.getTexture("whiteLight"));
 
 		_lightPad.scaleY._ *= 1/2;
 		_lightPad.anchorY._ = _lightPad.getNaturalHeight()/2;
@@ -62,15 +62,15 @@ class Light extends Component {
 
 		_lightMask.setXY(
 			_xCoord + 2, 
-			_yCoord - 4
+			_yCoord - 14
 		);
 
 		_lightPad.pointerDown.connect(function (_) modifyLight());
 
 		_lightMask.alpha._ = 0.1;
-		_lightMask.setBlendMode(Add);
-		owner.addChild(new Entity().add(_lightPad));
+		_lightMask.setBlendMode(Screen);
 		owner.addChild(new Entity().add(_lightMask));
+		owner.addChild(new Entity().add(_lightPad));
 	}
 
 	private function modifyLight() {
