@@ -8,6 +8,8 @@ import flambe.display.ImageSprite;
 import flambe.display.Texture;
 import flambe.asset.Manifest;
 
+
+
 class Light extends Component {
 	private var _pack :AssetPack;
 	private var _lightPad :ImageSprite;
@@ -18,7 +20,6 @@ class Light extends Component {
 	private var _image :String;
 	private var _isDown:Bool;
 	private var _instrument:Instrument;
-
 
 	public function new(xCoord:Float, yCoord:Float, dimSpeed:Float, image:String) {
 		_xCoord = xCoord;

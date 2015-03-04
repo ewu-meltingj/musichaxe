@@ -46,9 +46,8 @@ class Instrument extends Component {
 		}
 	}
 
-
 	public function playSoundEvent () {
-		_pack.getSound(_soundEvent).play(0.35);
+		_pack.getSound(_soundEvent).play(0.45);
 	}
 	 
 	override public function dispose() {

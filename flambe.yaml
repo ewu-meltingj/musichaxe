@@ -24,11 +24,11 @@ orientation: portrait
 fullscreen: true
 
 # Additional flags to pass to the Haxe compiler.
-# haxe_flags: -lib nape -D foobar
+haxe_flags: -lib hxcollision
 # Additional paths to include in the build.
 # extra_paths:
 #   assets: dir1 dir2
-#   libs: dir1 dir2
+  # libs: dir1 dir2
 #   src: ../dir1 ../dir2
 #   web: ["dir1 with spaces", "dir2"]
 
