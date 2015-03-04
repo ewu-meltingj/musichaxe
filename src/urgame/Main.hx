@@ -2,68 +2,52 @@ package urgame;
 
 import flambe.Entity;
 import flambe.System;
-import flambe.asset.AssetPack;
-import flambe.asset.Manifest;
-import flambe.display.FillSprite;
-import flambe.display.ImageSprite;
 
 class Main {
 	private static function main () {
-		// Wind up all platform-specific stuff
 		System.init();
 		var width:Int = System.stage.width;
 		var height:Int = System.stage.height;
 		var bpm:Int = 80;
 
-		// Load up the compiled pack in the assets directory named "bootstrap"
-		//var background = new FillSprite(0x222222, width, height);
-		//var background = new ImageSprite(_pack.getTexture("whiteLight"), width, height);
-		//System.root.addChild(new Entity().add(background));
+		//heatbeat
+		System.root.add(new HeartBeat(bpm));
 
 		//background
-		System.root.addChild(new Entity()
-			.add(new Background(width, height))
-			);
+		System.root.addChild(new Entity().add(new Background(width, height)));
 
 		//floor
-		System.root.addChild(new Entity()
-			.add(new Floor())
-			);
+		System.root.addChild(new Entity().add(new Floor()));
 
 		//first
 		System.root.addChild(new Entity()
-			.add(new HeartBeat(bpm))
 			.add(new Light(width/2 - 400, height - 60, 0.002, "circleBlue"))
-			.add(new Rain("rainStick", "mindFive"))
-			);
+			.add(new Instrument("rainStick", "mindOne", Rhythms.seventeen_32, 1))
+		);
 
 		//second
 		System.root.addChild(new Entity()
-			.add(new HeartBeat(bpm))
 			.add(new Light(width/2 - 200, height - 60, .005, "circleBlue"))
-			.add(new Bass("kickElectro02", "mindOne"))
-			);
+			.add(new Instrument("kickElectro02", "mindTwo", Rhythms.one_4, 1))
+		);
 
 		//third
 		System.root.addChild(new Entity()
-			.add(new HeartBeat(bpm))
 			.add(new Light(width/2, height - 60, .005, "circleBlue"))
-			.add(new Snare("snareBlock", "mindThree"))
-			);
+			.add(new Instrument("snareBlock", "mindThree", Rhythms.three_4, 0.6))
+		);
 
 		//fourth
 		System.root.addChild(new Entity()
-			.add(new HeartBeat(bpm))
 			.add(new Light(width/2 + 200, height - 60, 0.015, "circleBlue"))
-			.add(new Hats("hihatClip", "mindTwo"))
-			);
+			.add(new Instrument("hihatClip", "mindFour", Rhythms.twoAndFour_4, 0.3))
+		);
 
 		//fifth
 		System.root.addChild(new Entity()
-			.add(new HeartBeat(bpm))
 			.add(new Light(width/2 + 400, height - 60, 0.005, "circleBlue"))
-			.add(new Arp("arp", "mindFour"))
-			);
+			.add(new Instrument("arp", "mindFive", Rhythms.one_16, 1))
+		);
 
 		//man
 		//System.root.addChild(new Entity()

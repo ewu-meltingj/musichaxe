@@ -43,7 +43,6 @@ class Floor extends Component {
 
 		owner.addChild(new Entity().add(_floorMain));
 		owner.addChild(new Entity().add(_floorShadow));
-		//owner.add(_floorShadow);
 	}
 
 	override public function onUpdate(dt:Float) {

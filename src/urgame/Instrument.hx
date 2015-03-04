@@ -13,16 +13,14 @@ class Instrument extends Component {
 	private var _light :Light;
 	private var _sound:String;
 	private var _soundEvent:String;
+	private var _rhythmFunc:Int->Bool;
+	private var _velocity:Float;
 
-	public function new(sound:String, soundEvent:String) {
+	public function new(sound:String, soundEvent:String, func:Int->Bool, velocity:Float) {
 		_sound = sound;
 		_soundEvent = soundEvent;
-	}
-
-	override public function onAdded () {
-		var manifest = Manifest.fromAssets("audio");
-		var loader = System.loadAssetPack(manifest);
-		loader.get(onSuccess);
+		_rhythmFunc = func;
+		_velocity = velocity;
 	}
 
 	override public function onStart() {
@@ -31,19 +29,30 @@ class Instrument extends Component {
 		_connection = heartBeat.beat.changed.connect(onBeatChanged);
 	}
 
-	function onBeatChanged(to:Int, from:Int) {
-	}
-	 
-	override public function dispose() {
-		_connection.dispose();
-		super.dispose();
+	override public function onAdded () {
+		var manifest = Manifest.fromAssets("audio");
+		var loader = System.loadAssetPack(manifest);
+		loader.get(onSuccess);
 	}
 
 	private function onSuccess (pack :AssetPack) {
 		_pack = pack;
 	}
 
+	private function onBeatChanged(to:Int, from:Int) {
+		if(_rhythmFunc(from)) {
+			_pack.getSound(_sound).play(_velocity);
+			_light.onMaxLight();
+		}
+	}
+
+
 	public function playSoundEvent () {
 		_pack.getSound(_soundEvent).play(0.35);
+	}
+	 
+	override public function dispose() {
+		_connection.dispose();
+		super.dispose();
 	}
 }

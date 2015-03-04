@@ -3,7 +3,6 @@ package urgame;
 import flambe.Component;
 import flambe.System;
 import flambe.asset.AssetPack;
-import flambe.display.FillSprite;
 import flambe.asset.Manifest;
 import flambe.Entity;
 import flambe.display.PatternSprite;
@@ -28,10 +27,7 @@ class Background extends Component {
 
 	private function onSuccess (pack :AssetPack) {
 		_pack = pack;
-		
 		_background = new PatternSprite(_pack.getTexture("stardust"), _width, _height);
-
 		owner.addChild(new Entity().add(_background));
 	}
-
 }
