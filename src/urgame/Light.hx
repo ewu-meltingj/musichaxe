@@ -1,25 +1,28 @@
 package urgame;
 
 import flambe.Component;
+import flambe.Entity;
 import flambe.System;
 import flambe.asset.AssetPack;
 import flambe.display.ImageSprite;
+import flambe.display.Graphics;
+import flambe.display.Texture;
 import flambe.asset.Manifest;
 import flambe.script.Delay;
-import flambe.display.EmitterMold;
-import flambe.display.EmitterSprite;
 import flambe.input.PointerEvent;
 
 
 class Light extends Component {
 	private var _pack :AssetPack;
 	private var _lightPad :ImageSprite;
+	private var _lightMask :ImageSprite;
 	private var _xCoord :Float;
 	private var _yCoord :Float;
 	private var _dimSpeed :Float;
 	private var _image :String;
 	private var _isDown:Bool;
 	private var _instrument:Instrument;
+	private var _graphic :Graphics;
 
 
 	public function new(xCoord:Float, yCoord:Float, dimSpeed:Float, image:String) {
@@ -44,13 +47,30 @@ class Light extends Component {
 
 	private function addLight() {
 		_lightPad = new ImageSprite(_pack.getTexture(_image));
+		_lightMask = new ImageSprite(_pack.getTexture("light"));
+
+		_lightPad.scaleY._ *= 1/2;
+		_lightPad.anchorY._ = _lightPad.getNaturalHeight()/2;
+		_lightPad.anchorX._ = _lightPad.getNaturalWidth()/2;
+		_lightMask.anchorY._ = _lightMask.getNaturalHeight()/2;
+		_lightMask.anchorX._ = _lightMask.getNaturalWidth()/2;
+
 		_lightPad.setXY(
-			_xCoord - _lightPad.getNaturalWidth()/2, 
-			_yCoord - _lightPad.getNaturalHeight()/2
+			_xCoord, 
+			_yCoord
+		);
+
+		_lightMask.setXY(
+			_xCoord + 2, 
+			_yCoord - 4
 		);
 
 		_lightPad.pointerDown.connect(function (_) modifyLight());
-		owner.add(_lightPad);
+
+		_lightMask.alpha._ = 0.1;
+		_lightMask.setBlendMode(Add);
+		owner.addChild(new Entity().add(_lightPad));
+		owner.addChild(new Entity().add(_lightMask));
 	}
 
 	private function modifyLight() {
@@ -59,7 +79,7 @@ class Light extends Component {
 	}
 
 	override public function onUpdate(dt:Float) {
-		if(_lightPad.alpha._ > 0 && _isDown) {
+		if(_lightPad.alpha._ > 0.3 && _isDown) {
 			dimLight(-1);
 		}
 		else if(_lightPad.alpha._ < 1) {
@@ -72,10 +92,13 @@ class Light extends Component {
 
 	public function maxLight() {
 		_lightPad.alpha._ = 1;
+		_lightMask.alpha._ = 0.4;
 	}
 
 	public function dimLight(direction:Int) {
 		_lightPad.alpha._ += _dimSpeed*direction;
+		_lightMask.alpha._ += _dimSpeed*direction;
+
 	}
 
 	private function getRad(angle:Float) : Float{

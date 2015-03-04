@@ -5,11 +5,13 @@ import flambe.System;
 import flambe.asset.AssetPack;
 import flambe.display.FillSprite;
 import flambe.asset.Manifest;
+import flambe.Entity;
 
 
 class Floor extends Component {
 	private var _pack :AssetPack;
-	private var _fSprite :FillSprite;
+	private var _floorMain :FillSprite;
+	private var _floorShadow :FillSprite;
 	private var _width:Float;
 	private var _height:Float;
 
@@ -26,11 +28,18 @@ class Floor extends Component {
 
 	private function onSuccess (pack :AssetPack) {
 		_pack = pack;
-		var height = 100;
-	    _fSprite = new FillSprite(0x555555, _width, height);
-	    _fSprite.setXY(0, _height - height);
+		var mainHeight = 75;
+		var shadowHeight = 10;
+	    _floorMain = new FillSprite(0x555555, _width, mainHeight);
+	    _floorShadow = new FillSprite(0x777777, _width, shadowHeight);
 
-		owner.add(_fSprite);
+	    _floorMain.setXY(0, _height - mainHeight - 10);
+	    _floorShadow.setXY(0, _height - shadowHeight - 10);
+
+
+		owner.addChild(new Entity().add(_floorMain));
+		owner.addChild(new Entity().add(_floorShadow));
+		//owner.add(_floorShadow);
 	}
 
 	override public function onUpdate(dt:Float) {
