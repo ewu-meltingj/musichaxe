@@ -26,6 +26,10 @@ class Floor extends Component {
 		loader.get(onSuccess);
 	}
 
+	public function getFloor() : FillSprite {
+		return _floorMain;
+	}
+
 	private function onSuccess (pack :AssetPack) {
 		_pack = pack;
 		var mainHeight = 75;

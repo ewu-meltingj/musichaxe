@@ -65,6 +65,11 @@ class Main {
 			.add(new Arp("arp", "mindFour"))
 			);
 
+		//man
+		//System.root.addChild(new Entity()
+		//	.add(new Man())
+		//	);
+
 		
 	}
 }

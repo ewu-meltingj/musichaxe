@@ -92,7 +92,7 @@ class Light extends Component {
 
 	public function maxLight() {
 		_lightPad.alpha._ = 1;
-		_lightMask.alpha._ = 0.4;
+		_lightMask.alpha._ = 0.6;
 	}
 
 	public function dimLight(direction:Int) {
