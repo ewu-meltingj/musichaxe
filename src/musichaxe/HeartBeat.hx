@@ -1,4 +1,4 @@
-package urgame;
+package musichaxe;
 
 import flambe.Component;
 import flambe.util.Value;

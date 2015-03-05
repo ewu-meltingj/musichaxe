@@ -14,7 +14,7 @@ id: com.shwamm.musixhaxe
 version: 1.0.2
 
 # The main class name.
-main: urgame.Main
+main: musichaxe.Main
 
 # The platform to use when invoking `run` or `build` with no arguments.
 default_platform: flash
