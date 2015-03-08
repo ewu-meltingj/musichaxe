@@ -11,6 +11,7 @@ class M_Level extends Component {
 	private var _worldLayer:Entity;
 	private var _lightLayer:Entity;
 	private var _floorLayer:Entity;
+	private var _characterLayer:Entity;
 	
 	public function new(ctx :Context) {
 		_ctx = ctx;
@@ -28,6 +29,7 @@ class M_Level extends Component {
 		_worldLayer.addChild(new Entity().add(background));
 		_worldLayer.addChild(_floorLayer = new Entity());
 		_worldLayer.addChild(_lightLayer = new Entity());
+		_worldLayer.addChild(_characterLayer = new Entity());
 
 		_worldLayer.add(new HeartBeat(bpm));
 
@@ -37,27 +39,38 @@ class M_Level extends Component {
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2 - 400, height - 60, 0.005))
+			.add(new Collidable(_ctx))
 			.add(new Instrument(_ctx, "audio/rainStick", Rhythms.seventeen_32, 1))
 		);
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2 - 200, height - 60, .005))
+			.add(new Collidable(_ctx))
 			.add(new Instrument(_ctx, "audio/kickElectro02", Rhythms.one_4, 1))
 		);
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2, height - 60, .005))
+			.add(new Collidable(_ctx))
 			.add(new Instrument(_ctx, "audio/snareBlock", Rhythms.three_4, 0.6))
 		);
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2 + 200, height - 60, 0.005))
+			.add(new Collidable(_ctx))
 			.add(new Instrument(_ctx, "audio/hihatClip", Rhythms.twoAndFour_4, 0.3))
 		);
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2 + 400, height - 60, 0.005))
+			.add(new Collidable(_ctx))
 			.add(new Instrument(_ctx, "audio/arp", Rhythms.one_16, 1))
+		);
+
+		_lightLayer.addChild(new Entity()
+			.add(new Character(_ctx))
+			.add(new Collidable(_ctx))
+			.add(new Move())
 		);
 	}
 }
