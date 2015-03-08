@@ -37,27 +37,27 @@ class M_Level extends Component {
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2 - 400, height - 60, 0.005))
-			.add(new Instrument(_ctx, "audio/rainStick", "mindOne", Rhythms.seventeen_32, 1))
+			.add(new Instrument(_ctx, "audio/rainStick", Rhythms.seventeen_32, 1))
 		);
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2 - 200, height - 60, .005))
-			.add(new Instrument(_ctx, "audio/kickElectro02", "mindTwo", Rhythms.one_4, 1))
+			.add(new Instrument(_ctx, "audio/kickElectro02", Rhythms.one_4, 1))
 		);
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2, height - 60, .005))
-			.add(new Instrument(_ctx, "audio/snareBlock", "mindThree", Rhythms.three_4, 0.6))
+			.add(new Instrument(_ctx, "audio/snareBlock", Rhythms.three_4, 0.6))
 		);
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2 + 200, height - 60, 0.005))
-			.add(new Instrument(_ctx, "audio/hihatClip", "mindFour", Rhythms.twoAndFour_4, 0.3))
+			.add(new Instrument(_ctx, "audio/hihatClip", Rhythms.twoAndFour_4, 0.3))
 		);
 
 		_lightLayer.addChild(new Entity()
 			.add(new Light(_ctx, width/2 + 400, height - 60, 0.005))
-			.add(new Instrument(_ctx, "audio/arp", "mindFive", Rhythms.one_16, 1))
+			.add(new Instrument(_ctx, "audio/arp", Rhythms.one_16, 1))
 		);
 	}
 }

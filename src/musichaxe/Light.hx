@@ -7,18 +7,16 @@ import flambe.asset.AssetPack;
 import flambe.display.ImageSprite;
 import flambe.display.Texture;
 import flambe.asset.Manifest;
-import flambe.util.SignalConnection;
 
 class Light extends Component {
 	private var _pack :AssetPack;
-	private var _lightPad :ImageMaskSprite;
-	private var _lightMask :ImageMaskSprite;
+	private var _lightPad :ImageSprite;
+	private var _lightMask :ImageSprite;
 	private var _xCoord :Float;
 	private var _yCoord :Float;
 	private var _dimSpeed :Float;
 	private var _isDown:Bool;
 	private var _ctx:Context;
-	private var _connection:SignalConnection;
 
 	public function new(ctx:Context, xCoord:Float, yCoord:Float, dimSpeed:Float) {
 		_ctx = ctx;
@@ -28,32 +26,31 @@ class Light extends Component {
 		_isDown = true;
 	}
 
-	override public function onStart() {
-		var instrument = owner.get(Instrument);
-		_connection = instrument.hasStruck.changed.connect(onStruckChanged);
-	}
-
 	override public function onAdded () {
 		var lightTexture = _ctx.pack.getTexture("image/circleBlue");
 		var maskTexture = _ctx.pack.getTexture("image/whiteLight");
 
-		_lightPad = owner.get(ImageMaskSprite);
-		if (_lightPad == null) {
-			owner.add(_lightPad = new ImageMaskSprite(lightTexture, maskTexture));
-		}
+		owner.add(_lightPad = new ImageSprite(lightTexture));
+		owner.addChild(new Entity()
+			.add(_lightMask = new ImageSprite(maskTexture))
+		);
+
+		_lightMask.setBlendMode(Screen);
+		_lightMask.setXY(-38, -40);
 		_lightPad.texture = lightTexture;
 		_lightPad.centerAnchor();
 		_lightPad.scaleY._ *= 1/2;
 		_lightPad.alpha._ = 0.5;
 		_lightPad.setXY(_xCoord, _yCoord);
-		_lightPad.pointerDown.connect(function (_) onModifyLight());
+		_lightPad.pointerDown.connect(function (_) onTouchLight());
 	}
 
-	private function onStruckChanged(to:Bool, from:Bool) {
-		onModifyLight();
+	public function onTouchLight() {
+		_ctx.pack.getSound("audio/lightPress").play(0.25);
+		fullBrightness();
 	}
 
-	private function onModifyLight() {
+	public function fullBrightness() {
 		_lightPad.alpha._ = 1;
 	}
 

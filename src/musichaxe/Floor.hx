@@ -10,6 +10,7 @@ import flambe.Entity;
 
 class Floor extends Component {
 	private var _floorMain :FillSprite;
+	private var _floorShadow :FillSprite;
 	private var _width:Float;
 	private var _height:Float;
 	private var _ctx:Context;
@@ -21,13 +22,15 @@ class Floor extends Component {
 	}
 
 	override public function onAdded () {
-		_floorMain = owner.get(FillSprite);
 		var mainHeight = 75;
+		var shadowHeight = 10;
 		
-		if (_floorMain == null) {
-			owner.add(_floorMain = new FillSprite(0x555555, _width, mainHeight));
-		}
+		owner.add(_floorMain = new FillSprite(0x555555, _width, mainHeight));
+		owner.addChild(new Entity()
+			.add(_floorShadow = new FillSprite(0x656565, _width, shadowHeight))
+		);
+
 	    _floorMain.setXY(0, _height - mainHeight - 10);
-		_floorMain = new FillSprite(0x555555, _width, mainHeight);	    
+	    _floorShadow.setXY(0, mainHeight - shadowHeight);
 	}
 }

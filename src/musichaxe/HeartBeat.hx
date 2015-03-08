@@ -29,7 +29,6 @@ class HeartBeat extends Component {
 		if (_current >= _beat) {
 			_current = _current - _beat;
 			_seconds += 1;
-			new Delay(_current);
 			beat._ = Std.int(_seconds) % ticksPerBeat;
 		}
 	}
